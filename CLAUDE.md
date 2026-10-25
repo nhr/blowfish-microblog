@@ -102,6 +102,46 @@ To check pages visually, take screenshots with headless Chrome:
 
 Local Hugo (Homebrew) is newer than Micro.blog's 0.158, so a clean local build is necessary but not sufficient. The real test is installing on Micro.blog. When something breaks there, compare the live HTML with what the templates should produce: fetch the page, and look for which template's markup it contains.
 
+## Deploying and verifying
+
+1. Commit to `main` and push. Bump `plugin.json` `version` for each user-visible change.
+2. The site owner re-pulls the theme in Micro.blog, which rebuilds the site.
+3. **Check the live site, not just the test site.** The test site has missed real Micro.blog behaviour more than once:
+   - category pages falling through to the theme underneath
+   - `/archive/` being a home page output
+   - `notAlternative` feeds on the home page
+
+   Fetch the live pages and check:
+   - the `<title>`, `rel="canonical"` and `og:url` tags
+   - whether the header title link is present (`truncate min-w-0 shrink`): it should be absent on the home page only
+   - whether the image preload is present: it should be on the home page only
+   - which template's markup appears
+
+   For example:
+
+   ```sh
+   for u in "" archive/ photos/ categories/posts/ about/; do
+     curl -sL "https://SITE/$u?v=$RANDOM" | grep -o '<title>[^<]*\|rel="canonical" href="[^"]*'
+   done
+   ```
+
+   When something is wrong live, first make `dev/make-test-site.py` reproduce it, then fix it, so the test site keeps getting closer to Micro.blog.
+
+## Status
+
+- **Version 0.3.4**, deployed on https://harrisonripps.com (installed over Microwave) and verified live on 2026-10-25.
+- **Done:**
+  - home profile card
+  - Blowfish header and footer
+  - posts and replies
+  - category card grid, including video and SoundCloud media
+  - categories index
+  - archive and photos pages
+  - search on category and archive pages
+  - light and dark mode with color schemes
+  - Micro.blog hooks
+- **Unexplained:** one site owner found `social_threads` missing from Micro.blog's copy of `config.json` even though it is in the repo. The cause wasn't found. If keys go missing again, compare Micro.blog's copy with the repo.
+
 ## Reference themes
 
 When unsure how Micro.blog expects something done, look at recently updated themes:
@@ -110,6 +150,9 @@ When unsure how Micro.blog expects something done, look at recently updated them
 - **mikeschepker/Cobalt** shows the `Language.Locale` change.
 
 ## Not ported yet / ideas
+
+- **Footer name.** It uses the Micro.blog profile name (`.Site.Params.author.name`); consider `homeName` instead.
+- **Home image redirects.** Images under `https://SITE/uploads/…` redirect to `eu.uploads.micro.blog`. Pointing `homeImage` at the CDN URL saves a round trip. The theme could also rewrite it, but the CDN host varies by region.
 
 - **Footer name.** The footer copyright uses the Micro.blog profile name; it could use `homeName` instead.
 - **Images and longer posts.** Image zoom or a lightbox, a table of contents for long posts, and related posts.
