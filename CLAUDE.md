@@ -60,7 +60,7 @@ These were learned while building it, from the reference themes listed below, an
 | `layouts/list.photoshtml.html` | Photo grid |
 | `layouts/section/replies.html` | Replies |
 | `layouts/list.archivejson.json` | `/archive/index.json`, the search index |
-| `partials/search.html` + `static/js/search.js` | Search box on category and archive pages. The index loads on first focus. On a category page it can search that category or everything. Elements marked `data-search-hide` are hidden while results show, and `?q=` pre-fills the search. |
+| `partials/search.html` + `static/js/search.js` | Search on category and archive pages, in two parts: `part: "box"` sits in the `.page-header` beside the title (stacked on small screens, see `custom.css`) and `part: "results"` goes in the body. The index loads on first focus. On a category page it can search that category or everything. Elements marked `data-search-hide` are hidden while results show, and `?q=` pre-fills the search. |
 | `partials/article-meta.html` | Date, reading time, category badges (the current category's badge is hidden on its own page via `hide`) |
 | `partials/functions/post-media.html` | Returns `{image, video, embed}` for a post's card thumbnail |
 | `partials/social-links.html` | Icons for the `social_*` settings, which are full URLs |

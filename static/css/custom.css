@@ -73,6 +73,28 @@
 .search-scope input {
   accent-color: rgba(var(--color-primary-600), 1);
 }
+/* Page title with the search box beside it (stacked on small screens) */
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.page-header .search {
+  width: 100%;
+  max-width: 24rem;
+}
+@media (min-width: 768px) {
+  .page-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header .search {
+    flex: none;
+    width: 18rem;
+  }
+}
+
 /* The input sits inside a bordered box; draw focus on the box instead */
 .search input[type="search"] {
   border: 0;

@@ -1,14 +1,20 @@
 {{ define "main" }}
   {{- $posts := where site.RegularPages "Type" "post" }}
   {{- $years := $posts.GroupByDate "2006" }}
-  <header class="mt-5">
-    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">Archive</h1>
-    <div class="mt-1 mb-2 text-base text-neutral-500 dark:text-neutral-400">
-      {{ len $posts }} posts
+  {{- $search := site.Params.showSearch | default true }}
+  <header class="page-header mt-5">
+    <div>
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">Archive</h1>
+      <div class="mt-1 mb-2 text-base text-neutral-500 dark:text-neutral-400">
+        {{ len $posts }} posts
+      </div>
     </div>
+    {{- if $search }}
+      {{ partial "search.html" (dict "part" "box") }}
+    {{- end }}
   </header>
-  {{- if site.Params.showSearch | default true }}
-    {{ partial "search.html" (dict "page" .) }}
+  {{- if $search }}
+    {{ partial "search.html" (dict "part" "results") }}
   {{- end }}
 
   {{- with site.Taxonomies.categories }}

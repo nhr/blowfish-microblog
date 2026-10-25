@@ -7,8 +7,9 @@
   if (!section) return;
 
   var input = section.querySelector("input[type=search]");
-  var status = section.querySelector(".search-status");
-  var list = section.querySelector(".search-results");
+  // The box sits in the page header; status and results are in the body
+  var status = document.querySelector(".search-status");
+  var list = document.querySelector(".search-results");
   var category = section.getAttribute("data-category");
   var hidden = document.querySelectorAll("[data-search-hide]");
   var MAX_RESULTS = 30;

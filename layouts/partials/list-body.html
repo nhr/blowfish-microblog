@@ -1,13 +1,17 @@
 {{- /* Body of a list page: section or category. Shared by list.html,
        term.html and taxonomy.html. */ -}}
-  <header class="mt-5">
+  {{- $search := and (eq .Kind "term") (site.Params.showSearch | default true) }}
+  <header class="page-header mt-5">
     <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title | safeHTML }}</h1>
+    {{- if $search }}
+      {{ partial "search.html" (dict "part" "box" "category" .Title) }}
+    {{- end }}
   </header>
   {{- with .Content }}
     <section class="mt-4 prose dark:prose-invert max-w-prose">{{ . }}</section>
   {{- end }}
-  {{- if and (eq .Kind "term") (site.Params.showSearch | default true) }}
-    {{ partial "search.html" (dict "page" . "category" .Title) }}
+  {{- if $search }}
+    {{ partial "search.html" (dict "part" "results") }}
   {{- end }}
   {{- $pages := where .Pages "Type" "post" }}
   {{- if not $pages }}{{ $pages = .Pages }}{{ end }}
