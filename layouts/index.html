@@ -30,21 +30,6 @@
       <div class="mt-3 text-2xl">
         {{ partial "social-links.html" . }}
       </div>
-      {{- /* Numbered fields rather than a list, so the plug-in settings
-             screen can edit them. */ -}}
-      {{- $buttons := slice }}
-      {{- range $n := seq 3 }}
-        {{- $label := index site.Params (printf "homebutton%dlabel" $n) }}
-        {{- $url := index site.Params (printf "homebutton%durl" $n) }}
-        {{- if and $label $url }}{{ $buttons = $buttons | append (dict "label" $label "url" $url) }}{{ end }}
-      {{- end }}
-      {{- with $buttons }}
-        <nav aria-label="Highlights" class="mt-8 flex flex-wrap justify-center gap-3">
-          {{- range . }}
-            <a class="px-4 py-2 rounded-md font-semibold bg-primary-600 text-white hover:bg-primary-500" href="{{ .url | safeURL }}">{{ .label }}</a>
-          {{- end }}
-        </nav>
-      {{- end }}
     </header>
     {{- with .Content }}
       <section class="prose dark:prose-invert w-full">{{ . }}</section>

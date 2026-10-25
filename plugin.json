@@ -61,42 +61,6 @@
       "placeholder": ""
     },
     {
-      "field": "params.homeButton1Label",
-      "label": "Home button 1 label",
-      "type": "string",
-      "placeholder": ""
-    },
-    {
-      "field": "params.homeButton1Url",
-      "label": "Home button 1 URL",
-      "type": "string",
-      "placeholder": "/categories/example/"
-    },
-    {
-      "field": "params.homeButton2Label",
-      "label": "Home button 2 label",
-      "type": "string",
-      "placeholder": ""
-    },
-    {
-      "field": "params.homeButton2Url",
-      "label": "Home button 2 URL",
-      "type": "string",
-      "placeholder": ""
-    },
-    {
-      "field": "params.homeButton3Label",
-      "label": "Home button 3 label",
-      "type": "string",
-      "placeholder": ""
-    },
-    {
-      "field": "params.homeButton3Url",
-      "label": "Home button 3 URL",
-      "type": "string",
-      "placeholder": ""
-    },
-    {
       "field": "params.homeShowRecent",
       "label": "Show recent posts on the home page",
       "type": "boolean"
