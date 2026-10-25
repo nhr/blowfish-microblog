@@ -4,7 +4,7 @@
     <header class="h-card relative px-1 py-1 flex flex-col items-center mb-3 w-full">
       {{- with site.Params.homeImage }}
         <img
-          class="u-photo w-full max-w-3xl rounded-2xl shadow-xl nozoom mb-8"
+          class="u-photo w-full rounded-2xl shadow-xl nozoom mb-8"
           src="{{ . }}"
           alt="{{ site.Params.homeImageAlt | default $name }}"
           loading="eager"

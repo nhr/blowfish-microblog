@@ -38,6 +38,11 @@
   <meta name="twitter:card" content="summary">
   {{- end }}
 
+  {{/* Start fetching the home page image before the stylesheets load */}}
+  {{- if .IsHome }}{{ with site.Params.homeImage }}
+  <link rel="preload" as="image" href="{{ . }}" fetchpriority="high">
+  {{- end }}{{ end }}
+
   {{/* Feeds */}}
   {{- with .OutputFormats.Get "RSS" }}
   <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">

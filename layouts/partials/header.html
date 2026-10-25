@@ -1,13 +1,16 @@
 {{- $page := . }}
 <div class="main-menu flex items-center w-full gap-2 p-1 pl-0 py-6">
-  {{- with site.Params.logo }}
-    <a href="{{ "/" | relURL }}" class="flex">
-      <span class="sr-only">{{ site.Title }}</span>
-      <img src="{{ . }}" class="logo max-h-20 max-w-20 object-scale-down object-left nozoom" alt="">
-    </a>
-  {{- end }}
-  {{- if not site.Params.hideTitleInHeader }}
-    <a href="{{ "/" | relURL }}" class="text-base font-medium truncate min-w-0 shrink">{{ site.Title }}</a>
+  {{- /* The home page already shows the name front and centre */ -}}
+  {{- if not .IsHome }}
+    {{- with site.Params.logo }}
+      <a href="{{ "/" | relURL }}" class="flex">
+        <span class="sr-only">{{ site.Title }}</span>
+        <img src="{{ . }}" class="logo max-h-20 max-w-20 object-scale-down object-left nozoom" alt="">
+      </a>
+    {{- end }}
+    {{- if not site.Params.hideTitleInHeader }}
+      <a href="{{ "/" | relURL }}" class="text-base font-medium truncate min-w-0 shrink">{{ site.Title }}</a>
+    {{- end }}
   {{- end }}
   <div class="flex items-center ms-auto">
     <div class="hidden md:flex">
