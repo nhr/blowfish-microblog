@@ -1,6 +1,10 @@
 {{- /* One post as a card in a grid, after Blowfish's article-link/card.
        The whole card is a link; category badges sit above it. Untitled
        microposts use the date as the heading. */ -}}
+{{- $hide := "" -}}
+{{- $ctx := . -}}
+{{- if reflect.IsMap . }}{{ $ctx = .page }}{{ $hide = .hide }}{{ end -}}
+{{- with $ctx }}
 {{- $categoryClasses := slice }}
 {{- range .Params.categories }}{{ $categoryClasses = $categoryClasses | append (. | urlize) }}{{ end }}
 {{- $thumb := "" }}
@@ -31,7 +35,7 @@
     </header>
     {{- if .Title }}
       <div class="text-sm text-neutral-500 dark:text-neutral-400">
-        {{ partial "article-meta.html" . }}
+        {{ partial "article-meta.html" (dict "page" . "hide" $hide) }}
       </div>
     {{- end }}
     {{- if or (not .Title) (site.Params.showSummary | default true) }}
@@ -41,3 +45,4 @@
     {{- end }}
   </div>
 </article>
+{{- end }}

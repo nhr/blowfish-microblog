@@ -1,5 +1,9 @@
 {{- /* One post in a list. Titled posts get Blowfish's article-link layout
        with a thumbnail and summary; untitled microposts show in full. */ -}}
+{{- $hide := "" -}}
+{{- $ctx := . -}}
+{{- if reflect.IsMap . }}{{ $ctx = .page }}{{ $hide = .hide }}{{ end -}}
+{{- with $ctx }}
 {{- $categoryClasses := slice }}
 {{- range .Params.categories }}{{ $categoryClasses = $categoryClasses | append (. | urlize) }}{{ end }}
 {{- if .Title }}
@@ -26,7 +30,7 @@
         </a>
       </header>
       <div class="text-sm text-neutral-500 dark:text-neutral-400">
-        {{ partial "article-meta.html" . }}
+        {{ partial "article-meta.html" (dict "page" . "hide" $hide) }}
       </div>
       {{- if site.Params.showSummary | default true }}
         <div class="p-summary prose dark:prose-invert max-w-fit mt-1 line-clamp-3">
@@ -41,7 +45,8 @@
       {{ .Content }}
     </div>
     <div class="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
-      {{ partial "article-meta.html" . }}
+      {{ partial "article-meta.html" (dict "page" . "hide" $hide) }}
     </div>
   </article>
+{{- end }}
 {{- end }}

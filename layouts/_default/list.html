@@ -11,13 +11,13 @@
   {{- if site.Params.listCards | default true }}
     <section class="h-feed mt-10 w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
       {{- range $paginator.Pages }}
-        {{ partial "article-card.html" . }}
+        {{ partial "article-card.html" (dict "page" . "hide" $.RelPermalink) }}
       {{- end }}
     </section>
   {{- else }}
     <section class="h-feed mt-10 space-y-10 w-full max-w-prose">
       {{- range $paginator.Pages }}
-        {{ partial "article-link.html" . }}
+        {{ partial "article-link.html" (dict "page" . "hide" $.RelPermalink) }}
       {{- end }}
     </section>
   {{- end }}
