@@ -2,16 +2,17 @@
   {{- $posts := where site.RegularPages "Type" "post" }}
   {{- $years := $posts.GroupByDate "2006" }}
   {{- $search := site.Params.showSearch | default true }}
-  <header class="page-header mt-5">
-    <div>
+  <header class="mt-5">
+    {{- /* Only the title shares a row with the search box, so the two line up */}}
+    <div class="page-header">
       <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">Archive</h1>
-      <div class="mt-1 mb-2 text-base text-neutral-500 dark:text-neutral-400">
-        {{ len $posts }} posts
-      </div>
+      {{- if $search }}
+        {{ partial "search.html" (dict "part" "box") }}
+      {{- end }}
     </div>
-    {{- if $search }}
-      {{ partial "search.html" (dict "part" "box") }}
-    {{- end }}
+    <div class="mt-1 mb-2 text-base text-neutral-500 dark:text-neutral-400">
+      {{ len $posts }} posts
+    </div>
   </header>
   {{- if $search }}
     {{ partial "search.html" (dict "part" "results") }}
