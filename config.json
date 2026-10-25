@@ -14,6 +14,7 @@
     "homeShowRecent": false,
     "homeRecentCount": 5,
     "homeRecentCategory": "",
+    "listCards": true,
     "showSummary": true,
     "showReadingTime": true,
     "showCategories": true,

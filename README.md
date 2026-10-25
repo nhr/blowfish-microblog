@@ -9,7 +9,7 @@ Requires Micro.blog's Hugo 0.158 (Design → Hugo version).
 - **Home page.** A profile card: a large image or your avatar, your name, a headline and social links. Recent posts can optionally appear below it.
 - **Header.** Your Micro.blog menu, a light/dark toggle and a full-screen mobile menu. Pages with a `redirect_url` or `redirect` parameter link to that address.
 - **Posts and replies.** Titled posts get Blowfish's article layout with reading time and category badges. Untitled microposts show in full. Each post links to the next older and newer post, and `include_conversation` adds Micro.blog's conversation embed.
-- **Category pages.** Paginated lists of posts.
+- **Category pages.** Paginated posts as a grid of cards, with the post's first photo on top (or a plain list, if you turn cards off).
 - **Archive page.** Posts grouped by year, plus links to every category.
 - **Photos page.** A square-tile grid.
 - **Replies page.** Respects `paginate_replies`.
@@ -26,6 +26,7 @@ All settings are on the plug-in's settings screen.
 | Color scheme | `blowfish` (default), `avocado`, `autumn`, `bloody`, `burufugu`, `congo`, `fire`, `forest`, `github`, `marvel`, `neon`, `noir`, `ocean`, `one-light`, `princess`, `slate`, `terminal` |
 | Default appearance | `light` or `dark`, used when not following the system setting |
 | Home page name, headline, image | The name defaults to your Micro.blog name. Without an image, your avatar is shown. |
+| Show category pages as cards | On by default |
 | Show recent posts on home page | Optionally limited to one category |
 | Social profile URLs | Bluesky, Mastodon, Threads, Instagram, Pixelfed, Tumblr, X, LinkedIn, GitHub, Last.fm, Letterboxd, email |
 

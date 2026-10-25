@@ -72,6 +72,11 @@
       "placeholder": "Leave blank for all posts"
     },
     {
+      "field": "params.listCards",
+      "label": "Show category pages as cards",
+      "type": "boolean"
+    },
+    {
       "field": "params.showSummary",
       "label": "Show summaries for titled posts in lists",
       "type": "boolean"

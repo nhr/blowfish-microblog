@@ -8,10 +8,18 @@
   {{- $pages := where .Pages "Type" "post" }}
   {{- if not $pages }}{{ $pages = .Pages }}{{ end }}
   {{- $paginator := .Paginate $pages.ByDate.Reverse (site.Params.listPageSize | default 20) }}
-  <section class="h-feed mt-10 space-y-10 w-full max-w-prose">
-    {{- range $paginator.Pages }}
-      {{ partial "article-link.html" . }}
-    {{- end }}
-  </section>
+  {{- if site.Params.listCards | default true }}
+    <section class="h-feed mt-10 w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+      {{- range $paginator.Pages }}
+        {{ partial "article-card.html" . }}
+      {{- end }}
+    </section>
+  {{- else }}
+    <section class="h-feed mt-10 space-y-10 w-full max-w-prose">
+      {{- range $paginator.Pages }}
+        {{ partial "article-link.html" . }}
+      {{- end }}
+    </section>
+  {{- end }}
   {{ partial "pagination.html" $paginator }}
 {{ end }}

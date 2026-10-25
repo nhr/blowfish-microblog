@@ -1,0 +1,43 @@
+{{- /* One post as a card in a grid, after Blowfish's article-link/card.
+       The whole card is a link; category badges sit above it. Untitled
+       microposts use the date as the heading. */ -}}
+{{- $categoryClasses := slice }}
+{{- range .Params.categories }}{{ $categoryClasses = $categoryClasses | append (. | urlize) }}{{ end }}
+{{- $thumb := "" }}
+{{- with .Params.photos }}{{ $thumb = index . 0 }}{{ end }}
+{{- if and (not $thumb) .Params.images }}{{ $thumb = index .Params.images 0 }}{{ end }}
+<article class="h-entry article-link--card group relative flex flex-col min-h-full min-w-full overflow-hidden rounded-lg border border-neutral-300/80 bg-white/85 dark:border-neutral-600/80 dark:bg-neutral-900/80 {{ delimit $categoryClasses " " }}">
+  {{- with $thumb }}
+    <div class="flex-none relative overflow-hidden thumbnail_card">
+      <img
+        src="{{ . }}"
+        alt=""
+        loading="lazy"
+        decoding="async"
+        class="u-photo nozoom not-prose absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]">
+    </div>
+  {{- end }}
+  <div class="p-4">
+    <header>
+      <a
+        href="{{ .RelPermalink }}"
+        class="u-url not-prose before:absolute before:inset-0 decoration-primary-500 dark:text-neutral text-xl font-bold text-neutral-800 hover:underline hover:underline-offset-2">
+        {{- if .Title }}
+          <h2 class="p-name">{{ .Title | safeHTML }}</h2>
+        {{- else }}
+          <h2><time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date | time.Format ":date_long" }}</time></h2>
+        {{- end }}
+      </a>
+    </header>
+    {{- if .Title }}
+      <div class="text-sm text-neutral-500 dark:text-neutral-400">
+        {{ partial "article-meta.html" . }}
+      </div>
+    {{- end }}
+    {{- if or (not .Title) (site.Params.showSummary | default true) }}
+      <div class="p-summary prose dark:prose-invert mt-2 line-clamp-5">
+        {{ .Summary | plainify | htmlUnescape }}
+      </div>
+    {{- end }}
+  </div>
+</article>
