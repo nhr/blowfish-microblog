@@ -1,25 +1,31 @@
 {{- /* One post as a card in a grid, after Blowfish's article-link/card.
        The whole card is a link; category badges sit above it. Untitled
-       microposts use the date as the heading. */ -}}
+       microposts use the date as the heading. Media comes from
+       functions/post-media.html. */ -}}
 {{- $hide := "" -}}
 {{- $ctx := . -}}
 {{- if reflect.IsMap . }}{{ $ctx = .page }}{{ $hide = .hide }}{{ end -}}
 {{- with $ctx }}
 {{- $categoryClasses := slice }}
 {{- range .Params.categories }}{{ $categoryClasses = $categoryClasses | append (. | urlize) }}{{ end }}
-{{- $thumb := "" }}
-{{- with .Params.photos }}{{ $thumb = index . 0 }}{{ end }}
-{{- if and (not $thumb) .Params.images }}{{ $thumb = index .Params.images 0 }}{{ end }}
+{{- $media := partial "functions/post-media.html" . }}
 <article class="h-entry article-link--card group relative flex flex-col min-h-full min-w-full overflow-hidden rounded-lg border border-neutral-300/80 bg-white/85 dark:border-neutral-600/80 dark:bg-neutral-900/80 {{ delimit $categoryClasses " " }}">
-  {{- with $thumb }}
+  {{- with $media.image }}
     <div class="flex-none relative overflow-hidden thumbnail_card">
       <img
         src="{{ . }}"
         alt=""
         loading="lazy"
         decoding="async"
-        class="u-photo nozoom not-prose absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]">
+        class="nozoom not-prose absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]">
+      {{- if $media.video }}
+        <span class="media-play" aria-hidden="true"></span>
+      {{- end }}
     </div>
+  {{- end }}
+  {{- with $media.embed }}
+    {{- /* z-10 lifts the player above the card-wide link so it stays playable */}}
+    <div class="card-embed relative z-10 not-prose">{{ . | safeHTML }}</div>
   {{- end }}
   <div class="p-4">
     <header>

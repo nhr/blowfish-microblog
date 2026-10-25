@@ -1,0 +1,29 @@
+{{- /* What to show at the top of a post's card or list entry. Returns a dict:
+       image: thumbnail URL (photo, video poster or YouTube thumbnail)
+       video: true when the thumbnail stands for a video
+       embed: an embedded player's iframe (SoundCloud etc.) when there is
+              no thumbnail to show */ -}}
+{{- $image := "" -}}
+{{- $video := false -}}
+{{- $embed := "" -}}
+{{- with .Params.photos }}{{ $image = index . 0 }}{{ end -}}
+{{- if and (not $image) .Params.images }}{{ $image = index .Params.images 0 }}{{ end -}}
+{{- if not $image -}}
+  {{- /* Micro.blog's uploaded videos carry a poster frame */ -}}
+  {{- with findRESubmatch `<video[^>]*\sposter="([^"]+)"` .Content 1 -}}
+    {{- $image = index (index . 0) 1 -}}
+    {{- $video = true -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $image -}}
+  {{- with findRESubmatch `<iframe[^>]*\ssrc="https?://(?:www\.)?youtube(?:-nocookie)?\.com/embed/([A-Za-z0-9_-]+)` .Content 1 -}}
+    {{- $image = printf "https://i.ytimg.com/vi/%s/hqdefault.jpg" (index (index . 0) 1) -}}
+    {{- $video = true -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $image -}}
+  {{- with findRE `(?s)<iframe\b.*?</iframe>` .Content 1 -}}
+    {{- $embed = index . 0 -}}
+  {{- end -}}
+{{- end -}}
+{{- return dict "image" $image "video" $video "embed" $embed -}}

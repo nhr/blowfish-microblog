@@ -7,11 +7,9 @@
 {{- $categoryClasses := slice }}
 {{- range .Params.categories }}{{ $categoryClasses = $categoryClasses | append (. | urlize) }}{{ end }}
 {{- if .Title }}
-  {{- $thumb := "" }}
-  {{- with .Params.photos }}{{ $thumb = index . 0 }}{{ end }}
-  {{- if and (not $thumb) .Params.images }}{{ $thumb = index .Params.images 0 }}{{ end }}
+  {{- $media := partial "functions/post-media.html" . }}
   <article class="h-entry article-link--simple group flex flex-col md:flex-row relative {{ delimit $categoryClasses " " }}">
-    {{- with $thumb }}
+    {{- with $media.image }}
       <div class="flex-none relative overflow-hidden thumbnail-shadow md:mr-7 thumbnail">
         <img
           src="{{ . }}"
@@ -19,6 +17,9 @@
           loading="lazy"
           decoding="async"
           class="nozoom not-prose absolute inset-0 h-full w-full object-cover">
+        {{- if $media.video }}
+          <span class="media-play" aria-hidden="true"></span>
+        {{- end }}
       </div>
     {{- end }}
     <div class="mt-3 md:mt-0">
