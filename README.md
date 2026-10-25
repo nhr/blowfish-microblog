@@ -48,6 +48,10 @@ Left out for now:
 - shortcodes
 - translations other than English
 
+## Development
+
+See [CLAUDE.md](CLAUDE.md) for how the theme fits Micro.blog, the conventions it follows and how to test it. `dev/make-test-site.py` builds a fake Micro.blog site to test against, and `dev/classcheck.py` finds CSS classes the stylesheet doesn't define.
+
 ## Credits
 
 Design and stylesheet by [Nuno Coração](https://github.com/nunocoracao) and the [Blowfish contributors](https://github.com/nunocoracao/blowfish), MIT licensed. Ported from Blowfish commit `ebe683e` (2026-10-07).
