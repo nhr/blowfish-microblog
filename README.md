@@ -11,6 +11,7 @@ Requires Micro.blog's Hugo 0.158 (Design → Hugo version).
 - **Posts and replies.** Titled posts get Blowfish's article layout with reading time and category badges. Untitled microposts show in full. Each post links to the next older and newer post, and `include_conversation` adds Micro.blog's conversation embed.
 - **Category pages.** Paginated posts as a grid of cards, with the post's first photo on top (or a plain list, if you turn cards off).
 - **Archive page.** Posts grouped by year, plus links to every category.
+- **Search.** A search box on category and archive pages (not the home page). On a category page it can search that category or everything. It searches posts' full text and categories, using this theme's version of `/archive/index.json`.
 - **Photos page.** A square-tile grid.
 - **Replies page.** Respects `paginate_replies`.
 - **Light and dark mode.** It follows the system setting by default, and visitors can override it with the toggle.
@@ -27,6 +28,7 @@ All settings are on the plug-in's settings screen.
 | Default appearance | `light` or `dark`, used when not following the system setting |
 | Home page name, headline, image | The name defaults to your Micro.blog name. Without an image, your avatar is shown. |
 | Show category pages as cards | On by default |
+| Show search on category and archive pages | On by default |
 | Show recent posts on home page | Optionally limited to one category |
 | Social profile URLs | Bluesky, Mastodon, Threads, Instagram, Pixelfed, Tumblr, X, LinkedIn, GitHub, Last.fm, Letterboxd, email |
 
@@ -41,7 +43,6 @@ Micro.blog layers a plug-in theme over the design selected underneath it, and an
 Tailwind only ships the classes Blowfish's own templates use. When changing templates, use a class that already appears in `static/css/main.css`, or add a rule to `static/css/custom.css`.
 
 Left out for now:
-- search
 - table of contents
 - image zoom
 - related posts

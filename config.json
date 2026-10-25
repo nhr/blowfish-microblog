@@ -36,6 +36,7 @@
     "showSummary": true,
     "showReadingTime": true,
     "showCategories": true,
+    "showSearch": true,
     "listPageSize": 20,
     "photosIgnoreCategories": []
   }

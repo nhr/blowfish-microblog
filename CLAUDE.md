@@ -27,7 +27,7 @@ These were learned while building it, from the reference themes listed below, an
 - **Special pages** use custom output formats:
   - `/archive/` uses `archivehtml`, rendered by `list.archivehtml.html`.
   - `/photos/` uses `photoshtml`, rendered by `list.photoshtml.html`.
-  - Micro.blog also publishes `/archive/index.json` (JSON Feed) by default, which a search feature could use.
+  - Micro.blog's default `/archive/index.json` (JSON Feed) cuts each post's `content_text` to about 100 characters and has no categories. This theme replaces it with `list.archivejson.json` (full text capped at 3000 characters, categories as `tags`) for search, as mnml and Cobalt do.
 - **Hooks every theme must call:** `partial "microblog_head.html"` in `<head>` and `partial "custom_footer.html"`, and loops over `site.Params.plugins_css`, `plugins_js` and `plugins_html`. `custom_head.html` is optional (guard with `templates.Exists`).
 - **Platform params:**
   - `theme_seconds`: cache-busting query string for static assets.
@@ -59,6 +59,8 @@ These were learned while building it, from the reference themes listed below, an
 | `layouts/list.archivehtml.html` | Archive grouped by year, with category badges |
 | `layouts/list.photoshtml.html` | Photo grid |
 | `layouts/section/replies.html` | Replies |
+| `layouts/list.archivejson.json` | `/archive/index.json`, the search index |
+| `partials/search.html` + `static/js/search.js` | Search box on category and archive pages. The index loads on first focus. On a category page it can search that category or everything. Elements marked `data-search-hide` are hidden while results show, and `?q=` pre-fills the search. |
 | `partials/article-meta.html` | Date, reading time, category badges (the current category's badge is hidden on its own page via `hide`) |
 | `partials/functions/post-media.html` | Returns `{image, video, embed}` for a post's card thumbnail |
 | `partials/social-links.html` | Icons for the `social_*` settings, which are full URLs |
@@ -109,7 +111,6 @@ When unsure how Micro.blog expects something done, look at recently updated them
 
 ## Not ported yet / ideas
 
-- **Search.** Use Micro.blog's `/archive/index.json` and a small script, like mnml's `search.js`.
 - **Footer name.** The footer copyright uses the Micro.blog profile name; it could use `homeName` instead.
 - **Images and longer posts.** Image zoom or a lightbox, a table of contents for long posts, and related posts.
 - **Other platform features.** Translations (English strings are hard-coded) and a `newsletter.html` template for Micro.blog's email newsletters.

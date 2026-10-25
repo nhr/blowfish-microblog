@@ -6,20 +6,23 @@
   {{- with .Content }}
     <section class="mt-4 prose dark:prose-invert max-w-prose">{{ . }}</section>
   {{- end }}
+  {{- if and (eq .Kind "term") (site.Params.showSearch | default true) }}
+    {{ partial "search.html" (dict "page" . "category" .Title) }}
+  {{- end }}
   {{- $pages := where .Pages "Type" "post" }}
   {{- if not $pages }}{{ $pages = .Pages }}{{ end }}
   {{- $paginator := .Paginate $pages.ByDate.Reverse (site.Params.listPageSize | default 20) }}
   {{- if site.Params.listCards | default true }}
-    <section class="h-feed mt-10 w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+    <section data-search-hide class="h-feed mt-10 w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
       {{- range $paginator.Pages }}
         {{ partial "article-card.html" (dict "page" . "hide" $.RelPermalink) }}
       {{- end }}
     </section>
   {{- else }}
-    <section class="h-feed mt-10 space-y-10 w-full max-w-prose">
+    <section data-search-hide class="h-feed mt-10 space-y-10 w-full max-w-prose">
       {{- range $paginator.Pages }}
         {{ partial "article-link.html" (dict "page" . "hide" $.RelPermalink) }}
       {{- end }}
     </section>
   {{- end }}
-  {{ partial "pagination.html" $paginator }}
+  <div data-search-hide>{{ partial "pagination.html" $paginator }}</div>

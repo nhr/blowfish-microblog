@@ -61,6 +61,29 @@
   border: 0;
 }
 
+/* Search: highlighted matches and scope radios */
+.search-results mark {
+  background-color: rgba(var(--color-primary-200), 1);
+  color: inherit;
+  border-radius: 0.125rem;
+}
+.dark .search-results mark {
+  background-color: rgba(var(--color-primary-800), 1);
+}
+.search-scope input {
+  accent-color: rgba(var(--color-primary-600), 1);
+}
+/* The input sits inside a bordered box; draw focus on the box instead */
+.search input[type="search"] {
+  border: 0;
+  box-shadow: none;
+  outline: none;
+}
+.search form:focus-within {
+  border-color: rgba(var(--color-primary-500), 1);
+  box-shadow: 0 0 0 1px rgba(var(--color-primary-500), 1);
+}
+
 /* Name on the home page is a link for h-card, but shouldn't look like one */
 .h-card .p-name a {
   color: inherit;

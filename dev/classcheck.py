@@ -22,11 +22,13 @@ for f in glob.glob(sys.argv[2] + "/**/*.html", recursive=True):
             used[c].add(f)
 
 # Hooks for microformats, JavaScript or category names, not styling.
+# fa-* classes sit inside Blowfish's icon SVGs.
 # not-prose is Tailwind Typography's opt-out marker, matched by attribute.
 hooks = re.compile(
-    r'^(h-|p-|u-|dt-|e-)'
+    r'^(h-|p-|u-|dt-|e-|fa-|svg-inline--fa)'
     r'|^(group|peer|nozoom|not-prose|main-menu|logo|article-content'
-    r'|article-link--simple|article-link--card|photo-tile|media-play|card-embed)$'
+    r'|article-link--simple|article-link--card|photo-tile|media-play|card-embed'
+    r'|search|search-status|search-results|search-scope)$'
 )
 categories = set()
 for f in glob.glob(sys.argv[2] + "/categories/*/", recursive=False):

@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "title": "Blowfish for Micro.blog",
   "description": "A trimmed-down port of the Blowfish Hugo theme for Micro.blog.",
   "fields": [
@@ -89,6 +89,11 @@
     {
       "field": "params.showCategories",
       "label": "Show categories on posts",
+      "type": "boolean"
+    },
+    {
+      "field": "params.showSearch",
+      "label": "Show search on category and archive pages",
       "type": "boolean"
     },
     {

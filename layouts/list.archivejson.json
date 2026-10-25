@@ -1,0 +1,22 @@
+{{- /* /archive/index.json, used by search. Same JSON Feed shape Micro.blog
+       publishes by default, but with each post's full text (capped) instead
+       of the first 100 characters, and categories as tags. */ -}}
+{{- $items := slice -}}
+{{- range (where site.RegularPages "Type" "post").ByDate.Reverse -}}
+  {{- $item := dict
+    "id" .Permalink
+    "url" .Permalink
+    "title" (.Title | plainify | htmlUnescape)
+    "content_text" (.Plain | htmlUnescape | truncate 3000)
+    "date_published" (.Date.Format "2006-01-02T15:04:05-07:00")
+  -}}
+  {{- with .Params.categories }}{{ $item = merge $item (dict "tags" .) }}{{ end -}}
+  {{- $items = $items | append $item -}}
+{{- end -}}
+{{- dict
+  "version" "https://jsonfeed.org/version/1"
+  "title" site.Title
+  "home_page_url" site.BaseURL
+  "feed_url" ("archive/index.json" | absURL)
+  "items" $items
+  | jsonify -}}

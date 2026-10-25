@@ -87,13 +87,14 @@ def main():
         "outputFormats": {
             "archivehtml": {"mediaType": "text/html", "baseName": "index", "isHTML": True},
             "photoshtml": {"mediaType": "text/html", "baseName": "index", "isHTML": True},
+            "archivejson": {"mediaType": "application/json", "baseName": "index", "isPlainText": True},
         },
         "params": params,
     }
     json.dump(config, open(os.path.join(site, "hugo.json"), "w"), indent=1)
 
     content = os.path.join(site, "content")
-    write(f"{content}/archive/_index.md", {"title": "Archive", "outputs": ["archivehtml"],
+    write(f"{content}/archive/_index.md", {"title": "Archive", "outputs": ["archivehtml", "archivejson"],
                                           "menu": {"main": {"name": "Archive", "weight": 50}}})
     write(f"{content}/photos/_index.md", {"title": "Photos", "outputs": ["photoshtml"]})
     write(f"{content}/replies/_index.md", {"title": "Replies"})

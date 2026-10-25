@@ -7,9 +7,12 @@
       {{ len $posts }} posts
     </div>
   </header>
+  {{- if site.Params.showSearch | default true }}
+    {{ partial "search.html" (dict "page" .) }}
+  {{- end }}
 
   {{- with site.Taxonomies.categories }}
-    <section class="mt-6 flex flex-row flex-wrap items-center gap-2">
+    <section data-search-hide class="mt-6 flex flex-row flex-wrap items-center gap-2">
       {{- range .Alphabetical }}
         <a href="{{ .Page.RelPermalink }}" class="relative">
           <span class="flex cursor-pointer">
@@ -20,13 +23,13 @@
     </section>
   {{- end }}
 
-  <nav aria-label="Years" class="mt-6 flex flex-row flex-wrap gap-x-5 text-base font-medium">
+  <nav data-search-hide aria-label="Years" class="mt-6 flex flex-row flex-wrap gap-x-5 text-base font-medium">
     {{- range $years }}
       <a href="#{{ .Key }}" class="decoration-primary-500 hover:underline hover:text-primary-600 dark:hover:text-primary-400">{{ .Key }}</a>
     {{- end }}
   </nav>
 
-  <section class="h-feed w-full max-w-prose">
+  <section data-search-hide class="h-feed w-full max-w-prose">
     {{- range $years }}
       <h2 id="{{ .Key }}" class="mt-12 text-2xl font-bold text-neutral-700 first:mt-8 dark:text-neutral-300">{{ .Key }}</h2>
       <hr class="w-36 border-dotted border-neutral-300 dark:border-neutral-600">

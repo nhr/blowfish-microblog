@@ -1,0 +1,37 @@
+{{- /* Search box for list pages. Pass a dict with "page" and, on a category
+       page, "category" (its name) to offer searching just that category.
+       While a search is active, search.js hides elements marked
+       data-search-hide and shows the results instead. */ -}}
+{{- $category := .category -}}
+<section
+  class="search mt-6 max-w-prose"
+  data-search
+  data-index="{{ "archive/index.json" | relURL }}"
+  {{ with $category }}data-category="{{ . }}"{{ end }}>
+  <form role="search" class="flex items-center flex-auto min-w-0 px-2 border rounded-md border-neutral-300 bg-neutral dark:border-neutral-600 dark:bg-neutral-800" onsubmit="return false;">
+    <label for="search-input" class="flex items-center justify-center w-8 h-8 text-neutral-400">
+      <span class="sr-only">Search</span>
+      {{ partial "icon.html" "search" }}
+    </label>
+    <input
+      type="search"
+      id="search-input"
+      name="q"
+      autocomplete="off"
+      class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+      placeholder="Search {{ with $category }}{{ . }}{{ else }}all posts{{ end }}…">
+  </form>
+  {{- with $category }}
+    <div class="search-scope mt-2 flex flex-row flex-wrap items-center gap-x-5 text-sm text-neutral-500 dark:text-neutral-400">
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input type="radio" name="search-scope" value="category" checked> In {{ . }}
+      </label>
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input type="radio" name="search-scope" value="all"> All posts
+      </label>
+    </div>
+  {{- end }}
+  <p class="search-status mt-4 text-sm text-neutral-500 dark:text-neutral-400 hidden" aria-live="polite"></p>
+  <ul class="search-results mt-2"></ul>
+</section>
+<script defer src="{{ "js/search.js" | relURL }}?{{ site.Params.theme_seconds }}"></script>
