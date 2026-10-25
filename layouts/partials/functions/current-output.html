@@ -1,0 +1,11 @@
+{{- /* The output format being rendered right now. Micro.blog renders /archive/
+       as extra output formats of the home page, and there .RelPermalink still
+       says "/"; this format's .RelPermalink and .Permalink are the real
+       address. It's the one format missing from .AlternativeOutputFormats. */ -}}
+{{- $current := .OutputFormats.Get "html" -}}
+{{- $alternatives := slice -}}
+{{- range .AlternativeOutputFormats }}{{ $alternatives = $alternatives | append .Name }}{{ end -}}
+{{- range .OutputFormats -}}
+  {{- if not (in $alternatives .Name) }}{{ $current = . }}{{ end -}}
+{{- end -}}
+{{- return $current -}}

@@ -25,8 +25,8 @@ These were learned while building it, from the reference themes listed below, an
   - `.InSection` and `.NextInSection` stop at year boundaries, so `single-post.html` walks the full post list (`post-list.html`) to find older and newer posts.
   - Replies have `type: reply`.
 - **Special pages** use custom output formats:
-  - `/archive/` uses `archivehtml`, rendered by `list.archivehtml.html`.
-  - `/photos/` uses `photoshtml`, rendered by `list.photoshtml.html`.
+  - `/archive/` (`archivehtml`, rendered by `list.archivehtml.html`) and `/archive/index.json` (`archivejson`) are extra output formats *of the home page*. On them, `.IsHome` is true and `.RelPermalink` is still `/`. Use `functions/is-home.html` rather than `.IsHome`, and `functions/current-output.html` for the real address (it's the format missing from `.AlternativeOutputFormats`).
+  - `/photos/` is an ordinary section page with the `photoshtml` output.
   - Micro.blog's default `/archive/index.json` (JSON Feed) cuts each post's `content_text` to about 100 characters and has no categories. This theme replaces it with `list.archivejson.json` (full text capped at 3000 characters, categories as `tags`) for search, as mnml and Cobalt do.
 - **Hooks every theme must call:** `partial "microblog_head.html"` in `<head>` and `partial "custom_footer.html"`, and loops over `site.Params.plugins_css`, `plugins_js` and `plugins_html`. `custom_head.html` is optional (guard with `templates.Exists`).
 - **Platform params:**

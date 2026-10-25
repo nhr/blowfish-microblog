@@ -1,6 +1,7 @@
 """Generate a throwaway Hugo site shaped like a Micro.blog blog, for testing.
 
 Mimics what Micro.blog provides: posts with type "post" under year sections,
+/archive/ as extra outputs of the home page,
 titled articles and untitled microposts, photo, video and SoundCloud posts,
 replies, archive/photos output formats, menu pages (one with redirect_url),
 author info under params.author, and stub microblog_head/custom_footer
@@ -85,17 +86,19 @@ def main():
         "taxonomies": {"category": "categories"},
         "markup": {"goldmark": {"renderer": {"unsafe": True}}},
         "outputFormats": {
-            "archivehtml": {"mediaType": "text/html", "baseName": "index", "isHTML": True},
+            # Micro.blog renders /archive/ as outputs of the home page, so
+            # .IsHome is true there too (see partials/functions/is-home.html)
+            "archivehtml": {"mediaType": "text/html", "baseName": "index", "isHTML": True, "path": "archive"},
             "photoshtml": {"mediaType": "text/html", "baseName": "index", "isHTML": True},
-            "archivejson": {"mediaType": "application/json", "baseName": "index", "isPlainText": True},
+            "archivejson": {"mediaType": "application/json", "baseName": "index", "isPlainText": True, "path": "archive"},
         },
+        "outputs": {"home": ["html", "rss", "archivehtml", "archivejson"]},
+        "menus": {"main": [{"name": "Archive", "url": "/archive/", "weight": 50}]},
         "params": params,
     }
     json.dump(config, open(os.path.join(site, "hugo.json"), "w"), indent=1)
 
     content = os.path.join(site, "content")
-    write(f"{content}/archive/_index.md", {"title": "Archive", "outputs": ["archivehtml", "archivejson"],
-                                          "menu": {"main": {"name": "Archive", "weight": 50}}})
     write(f"{content}/photos/_index.md", {"title": "Photos", "outputs": ["photoshtml"]})
     write(f"{content}/replies/_index.md", {"title": "Replies"})
     write(f"{content}/subscribe.md", {"title": "Mailing List!", "redirect_url": "https://example.com/subscribe",

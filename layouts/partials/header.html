@@ -1,7 +1,7 @@
 {{- $page := . }}
 <div class="main-menu flex items-center w-full gap-2 p-1 pl-0 py-6">
   {{- /* The home page already shows the name front and centre */ -}}
-  {{- if not .IsHome }}
+  {{- if not (partial "functions/is-home.html" .) }}
     {{- with site.Params.logo }}
       <a href="{{ "/" | relURL }}" class="flex">
         <span class="sr-only">{{ site.Title }}</span>

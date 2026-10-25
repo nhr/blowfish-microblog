@@ -2,9 +2,16 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{- $isHome := partial "functions/is-home.html" . }}
+  {{- $current := partial "functions/current-output.html" . }}
+  {{- $permalink := .Permalink }}
+  {{- with $current }}{{ $permalink = .Permalink }}{{ end }}
   <title>
-    {{- if .IsHome -}}
+    {{- if $isHome -}}
       {{ site.Title }}
+    {{- else if .IsHome -}}
+      {{- /* Another output of the home page, e.g. /archive/ */ -}}
+      {{ trim $current.RelPermalink "/" | humanize | title }} · {{ site.Title }}
     {{- else if .Title -}}
       {{ .Title | plainify | htmlUnescape }} · {{ site.Title }}
     {{- else -}}
@@ -13,23 +20,23 @@
   </title>
 
   {{- $description := site.Params.description | default site.Params.itunes_description }}
-  {{- if not .IsHome }}{{ with .Summary }}{{ $description = . }}{{ end }}{{ end }}
+  {{- if not $isHome }}{{ with .Summary }}{{ $description = . }}{{ end }}{{ end }}
   {{- $description = $description | plainify | htmlUnescape | truncate 160 }}
   <meta name="description" content="{{ $description }}">
   {{- with site.Params.author.name }}
   <meta name="author" content="{{ . }}">
   {{- end }}
-  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="canonical" href="{{ $permalink }}">
 
   {{/* Social cards */}}
   {{- $image := "" }}
   {{- with .Params.photos }}{{ $image = index . 0 }}{{ end }}
   {{- if and (not $image) .Params.images }}{{ $image = index .Params.images 0 }}{{ end }}
-  {{- if and (not $image) .IsHome }}{{ $image = site.Params.homeImage }}{{ end }}
+  {{- if and (not $image) $isHome }}{{ $image = site.Params.homeImage }}{{ end }}
   <meta property="og:site_name" content="{{ site.Title }}">
-  <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title | default site.Title | plainify | htmlUnescape }}{{ end }}">
+  <meta property="og:title" content="{{ if $isHome }}{{ site.Title }}{{ else }}{{ .Title | default site.Title | plainify | htmlUnescape }}{{ end }}">
   <meta property="og:description" content="{{ $description }}">
-  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:url" content="{{ $permalink }}">
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   {{- with $image }}
   <meta property="og:image" content="{{ . }}">
@@ -39,7 +46,7 @@
   {{- end }}
 
   {{/* Start fetching the home page image before the stylesheets load */}}
-  {{- if .IsHome }}{{ with site.Params.homeImage }}
+  {{- if $isHome }}{{ with site.Params.homeImage }}
   <link rel="preload" as="image" href="{{ . }}" fetchpriority="high">
   {{- end }}{{ end }}
 
