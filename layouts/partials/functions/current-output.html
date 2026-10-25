@@ -1,11 +1,17 @@
-{{- /* The output format being rendered right now. Micro.blog renders /archive/
-       as extra output formats of the home page, and there .RelPermalink still
-       says "/"; this format's .RelPermalink and .Permalink are the real
-       address. It's the one format missing from .AlternativeOutputFormats. */ -}}
+{{- /* The HTML output format being rendered right now. Micro.blog renders
+       /archive/ as an extra output format of the home page, and there
+       .RelPermalink still says "/"; this format's .RelPermalink and
+       .Permalink are the real address.
+
+       The current format is missing from .AlternativeOutputFormats, but so
+       are formats marked notAlternative (Micro.blog's home page has feeds
+       like podcast.json), so only HTML formats are considered. */ -}}
 {{- $current := .OutputFormats.Get "html" -}}
-{{- $alternatives := slice -}}
-{{- range .AlternativeOutputFormats }}{{ $alternatives = $alternatives | append .Name }}{{ end -}}
-{{- range .OutputFormats -}}
-  {{- if not (in $alternatives .Name) }}{{ $current = . }}{{ end -}}
+{{- if .AlternativeOutputFormats.Get "html" -}}
+  {{- $alternatives := slice -}}
+  {{- range .AlternativeOutputFormats }}{{ $alternatives = $alternatives | append (lower .Name) }}{{ end -}}
+  {{- range .OutputFormats -}}
+    {{- if and (eq .MediaType.Type "text/html") (not (in $alternatives (lower .Name))) }}{{ $current = . }}{{ end -}}
+  {{- end -}}
 {{- end -}}
 {{- return $current -}}

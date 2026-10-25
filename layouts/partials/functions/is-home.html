@@ -1,5 +1,5 @@
 {{- /* True only for the home page itself, not /archive/, which Micro.blog
        renders as another output format of the home page (.IsHome is true
-       there too). See functions/current-output.html. */ -}}
-{{- $current := partial "functions/current-output.html" . -}}
-{{- return and .IsHome (eq $current.Name "html") -}}
+       there too). "html" is listed among the alternatives on every output
+       except the html one itself. */ -}}
+{{- return and .IsHome (not (.AlternativeOutputFormats.Get "html")) -}}

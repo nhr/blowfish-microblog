@@ -64,6 +64,8 @@ def main():
         f.write('<link rel="me" href="https://micro.blog/test">\n')
     with open(os.path.join(site, "layouts/partials/custom_footer.html"), "w") as f:
         f.write("")
+    with open(os.path.join(site, "layouts/index.podcastjson.json"), "w") as f:
+        f.write("{}\n")
 
     params = json.load(open(os.path.join(THEME, "config.json")))["params"]
     params.update({
@@ -91,8 +93,11 @@ def main():
             "archivehtml": {"mediaType": "text/html", "baseName": "index", "isHTML": True, "path": "archive"},
             "photoshtml": {"mediaType": "text/html", "baseName": "index", "isHTML": True},
             "archivejson": {"mediaType": "application/json", "baseName": "index", "isPlainText": True, "path": "archive"},
+            # Micro.blog's home page also has feeds marked notAlternative, which
+            # never appear in .AlternativeOutputFormats (e.g. podcast.json)
+            "podcastjson": {"mediaType": "application/json", "baseName": "podcast", "isPlainText": True, "notAlternative": True},
         },
-        "outputs": {"home": ["html", "rss", "archivehtml", "archivejson"]},
+        "outputs": {"home": ["html", "rss", "archivehtml", "archivejson", "podcastjson"]},
         "menus": {"main": [{"name": "Archive", "url": "/archive/", "weight": 50}]},
         "params": params,
     }
