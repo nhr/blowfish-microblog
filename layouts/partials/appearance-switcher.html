@@ -1,0 +1,11 @@
+{{- if site.Params.showAppearanceSwitcher | default true }}
+  <button
+    id="{{ .id }}"
+    type="button"
+    aria-label="Toggle dark mode"
+    title="Toggle dark mode"
+    class="flex items-center justify-center bf-icon-color-hover">
+    <span class="dark:hidden">{{ partial "icon.html" "moon" }}</span>
+    <span class="hidden dark:block">{{ partial "icon.html" "sun" }}</span>
+  </button>
+{{- end }}

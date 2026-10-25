@@ -1,0 +1,42 @@
+{{- /* Each site param holds a full profile URL. Order here is display order. */ -}}
+{{- $links := slice
+  (dict "param" "social_bluesky" "icon" "bluesky" "label" "Bluesky")
+  (dict "param" "social_mastodon" "icon" "mastodon" "label" "Mastodon")
+  (dict "param" "social_threads" "icon" "threads" "label" "Threads")
+  (dict "param" "social_instagram" "icon" "instagram" "label" "Instagram")
+  (dict "param" "social_pixelfed" "icon" "pixelfed" "label" "Pixelfed")
+  (dict "param" "social_tumblr" "icon" "tumblr" "label" "Tumblr")
+  (dict "param" "social_x" "icon" "x-twitter" "label" "X")
+  (dict "param" "social_linkedin" "icon" "linkedin" "label" "LinkedIn")
+  (dict "param" "social_github" "icon" "github" "label" "GitHub")
+  (dict "param" "social_lastfm" "icon" "lastfm" "label" "Last.fm")
+  (dict "param" "social_letterboxd" "icon" "letterboxd" "label" "Letterboxd")
+-}}
+{{- $any := false -}}
+{{- range $links }}{{ if index site.Params .param }}{{ $any = true }}{{ end }}{{ end -}}
+{{- if or $any site.Params.social_email }}
+<div class="flex flex-wrap justify-center">
+  {{- range $link := $links }}
+    {{- with index site.Params $link.param }}
+      <a
+        class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+        href="{{ . }}"
+        target="_blank"
+        rel="me noopener noreferrer"
+        aria-label="{{ $link.label }}"
+        title="{{ $link.label }}">
+        {{ partial "icon.html" $link.icon }}
+      </a>
+    {{- end }}
+  {{- end }}
+  {{- with site.Params.social_email }}
+    <a
+      class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+      href="mailto:{{ . }}"
+      aria-label="Email"
+      title="Email">
+      {{ partial "icon.html" "envelope" }}
+    </a>
+  {{- end }}
+</div>
+{{- end }}

@@ -1,0 +1,18 @@
+<footer id="site-footer" class="py-10 print:hidden">
+  {{- if templates.Exists "partials/custom_footer.html" }}
+    <div class="pb-4 text-base text-neutral-500 dark:text-neutral-400">
+      {{ partial "custom_footer.html" . }}
+    </div>
+  {{- end }}
+  <div class="flex flex-col sm:flex-row gap-1 justify-between">
+    <p class="text-sm text-neutral-500 dark:text-neutral-400">
+      &copy; {{ now.Format "2006" }} {{ site.Params.author.name | default site.Title }}
+    </p>
+    <p class="text-xs text-neutral-500 dark:text-neutral-400">
+      Hosted by
+      <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://micro.blog/{{ site.Params.author.username }}" rel="me">Micro.blog</a>
+      &middot; Design based on
+      <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>
+    </p>
+  </div>
+</footer>

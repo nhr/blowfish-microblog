@@ -1,0 +1,22 @@
+{{ define "main" }}
+  {{- $ignore := site.Params.photosIgnoreCategories | default slice }}
+  {{- $pages := slice }}
+  {{- range (where site.RegularPages "Params.photos" "!=" nil).ByDate.Reverse }}
+    {{- if not (intersect (.Params.categories | default slice) $ignore) }}
+      {{- $pages = $pages | append . }}
+    {{- end }}
+  {{- end }}
+  <header class="mt-5">
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">Photos</h1>
+  </header>
+  <section class="mt-10 w-full grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+    {{- range $pages }}
+      {{- $page := . }}
+      {{- range first 1 .Params.photos }}
+        <a href="{{ $page.RelPermalink }}" class="photo-tile block overflow-hidden rounded-lg">
+          <img src="{{ . }}" alt="" loading="lazy" decoding="async" class="nozoom h-full w-full object-cover">
+        </a>
+      {{- end }}
+    {{- end }}
+  </section>
+{{ end }}

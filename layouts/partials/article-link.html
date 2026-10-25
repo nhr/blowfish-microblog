@@ -1,0 +1,47 @@
+{{- /* One post in a list. Titled posts get Blowfish's article-link layout
+       with a thumbnail and summary; untitled microposts show in full. */ -}}
+{{- $categoryClasses := slice }}
+{{- range .Params.categories }}{{ $categoryClasses = $categoryClasses | append (. | urlize) }}{{ end }}
+{{- if .Title }}
+  {{- $thumb := "" }}
+  {{- with .Params.photos }}{{ $thumb = index . 0 }}{{ end }}
+  {{- if and (not $thumb) .Params.images }}{{ $thumb = index .Params.images 0 }}{{ end }}
+  <article class="h-entry article-link--simple group flex flex-col md:flex-row relative {{ delimit $categoryClasses " " }}">
+    {{- with $thumb }}
+      <div class="flex-none relative overflow-hidden thumbnail-shadow md:mr-7 thumbnail">
+        <img
+          src="{{ . }}"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class="nozoom not-prose absolute inset-0 h-full w-full object-cover">
+      </div>
+    {{- end }}
+    <div class="mt-3 md:mt-0">
+      <header class="items-center text-start text-xl font-semibold">
+        <a
+          href="{{ .RelPermalink }}"
+          class="u-url not-prose before:absolute before:inset-0 decoration-primary-500 dark:text-neutral text-xl font-bold text-neutral-800 hover:underline hover:underline-offset-2">
+          <h2 class="p-name">{{ .Title | safeHTML }}</h2>
+        </a>
+      </header>
+      <div class="text-sm text-neutral-500 dark:text-neutral-400">
+        {{ partial "article-meta.html" . }}
+      </div>
+      {{- if site.Params.showSummary | default true }}
+        <div class="p-summary prose dark:prose-invert max-w-fit mt-1 line-clamp-3">
+          {{ .Summary | plainify | htmlUnescape }}
+        </div>
+      {{- end }}
+    </div>
+  </article>
+{{- else }}
+  <article class="h-entry {{ delimit $categoryClasses " " }}">
+    <div class="e-content prose dark:prose-invert max-w-prose">
+      {{ .Content }}
+    </div>
+    <div class="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+      {{ partial "article-meta.html" . }}
+    </div>
+  </article>
+{{- end }}

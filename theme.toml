@@ -1,0 +1,9 @@
+name = "Blowfish for Micro.blog"
+license = "MIT"
+description = "A trimmed-down port of the Blowfish Hugo theme for Micro.blog."
+min_version = "0.158.0"
+
+[original]
+  name = "Blowfish"
+  homepage = "https://blowfish.page/"
+  repo = "https://github.com/nunocoracao/blowfish"

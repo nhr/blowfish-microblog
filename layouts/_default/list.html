@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <header class="mt-5">
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title | safeHTML }}</h1>
+  </header>
+  {{- with .Content }}
+    <section class="mt-4 prose dark:prose-invert max-w-prose">{{ . }}</section>
+  {{- end }}
+  {{- $pages := where .Pages "Type" "post" }}
+  {{- if not $pages }}{{ $pages = .Pages }}{{ end }}
+  {{- $paginator := .Paginate $pages.ByDate.Reverse (site.Params.listPageSize | default 20) }}
+  <section class="h-feed mt-10 space-y-10 w-full max-w-prose">
+    {{- range $paginator.Pages }}
+      {{ partial "article-link.html" . }}
+    {{- end }}
+  </section>
+  {{ partial "pagination.html" $paginator }}
+{{ end }}

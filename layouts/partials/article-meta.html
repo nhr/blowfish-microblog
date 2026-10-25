@@ -1,0 +1,23 @@
+{{- /* Date, reading time (titled posts only) and categories for a post. */ -}}
+{{- with . }}
+<div class="flex flex-row flex-wrap items-center">
+  <a href="{{ .Permalink }}" class="u-url decoration-primary-500 hover:underline">
+    <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date | time.Format ":date_long" }}</time>
+  </a>
+  {{- if and .Title (site.Params.showReadingTime | default true) (gt .ReadingTime 1) }}
+    <span class="px-2 text-primary-500">&middot;</span>
+    <span title="Reading time">{{ .ReadingTime }} min read</span>
+  {{- end }}
+</div>
+{{- if and (site.Params.showCategories | default true) .Params.categories }}
+  <div class="flex flex-row flex-wrap items-center gap-1 mt-2">
+    {{- range .GetTerms "categories" }}
+      <a href="{{ .RelPermalink }}" class="relative">
+        <span class="flex cursor-pointer">
+          <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">{{ .LinkTitle }}</span>
+        </span>
+      </a>
+    {{- end }}
+  </div>
+{{- end }}
+{{- end }}

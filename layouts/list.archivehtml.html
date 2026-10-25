@@ -1,0 +1,48 @@
+{{ define "main" }}
+  {{- $posts := where site.RegularPages "Type" "post" }}
+  {{- $years := $posts.GroupByDate "2006" }}
+  <header class="mt-5">
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">Archive</h1>
+    <div class="mt-1 mb-2 text-base text-neutral-500 dark:text-neutral-400">
+      {{ len $posts }} posts
+    </div>
+  </header>
+
+  {{- with site.Taxonomies.categories }}
+    <section class="mt-6 flex flex-row flex-wrap items-center gap-2">
+      {{- range .Alphabetical }}
+        <a href="{{ .Page.RelPermalink }}" class="relative">
+          <span class="flex cursor-pointer">
+            <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">{{ .Page.Title }} ({{ .Count }})</span>
+          </span>
+        </a>
+      {{- end }}
+    </section>
+  {{- end }}
+
+  <nav aria-label="Years" class="mt-6 flex flex-row flex-wrap gap-x-5 text-base font-medium">
+    {{- range $years }}
+      <a href="#{{ .Key }}" class="decoration-primary-500 hover:underline hover:text-primary-600 dark:hover:text-primary-400">{{ .Key }}</a>
+    {{- end }}
+  </nav>
+
+  <section class="h-feed w-full max-w-prose">
+    {{- range $years }}
+      <h2 id="{{ .Key }}" class="mt-12 text-2xl font-bold text-neutral-700 first:mt-8 dark:text-neutral-300">{{ .Key }}</h2>
+      <hr class="w-36 border-dotted border-neutral-300 dark:border-neutral-600">
+      <ul class="mt-4 space-y-3">
+        {{- range .Pages }}
+          <li class="h-entry flex flex-col sm:flex-row gap-x-5">
+            <a href="{{ .RelPermalink }}" class="u-url flex-none w-36 text-sm text-neutral-500 dark:text-neutral-400 decoration-primary-500 hover:underline">
+              <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date | time.Format ":date_medium" }}</time>
+            </a>
+            <a href="{{ .RelPermalink }}" class="text-base decoration-primary-500 hover:underline">
+              {{- if .Title }}<span class="p-name font-bold">{{ .Title | safeHTML }}</span>
+              {{- else }}<span class="p-summary">{{ .Summary | plainify | htmlUnescape | truncate 120 }}</span>{{ end -}}
+            </a>
+          </li>
+        {{- end }}
+      </ul>
+    {{- end }}
+  </section>
+{{ end }}

@@ -1,0 +1,198 @@
+{
+  "version": "0.1.0",
+  "title": "Blowfish for Micro.blog",
+  "description": "A trimmed-down port of the Blowfish Hugo theme for Micro.blog.",
+  "fields": [
+    {
+      "field": "params.colorScheme",
+      "label": "Color scheme",
+      "type": "string",
+      "placeholder": "blowfish, avocado, fire, forest, ocean, slate, terminal, …"
+    },
+    {
+      "field": "params.defaultAppearance",
+      "label": "Default appearance",
+      "type": "string",
+      "placeholder": "light or dark"
+    },
+    {
+      "field": "params.autoSwitchAppearance",
+      "label": "Follow the visitor's light/dark system setting",
+      "type": "boolean"
+    },
+    {
+      "field": "params.showAppearanceSwitcher",
+      "label": "Show the light/dark toggle",
+      "type": "boolean"
+    },
+    {
+      "field": "params.logo",
+      "label": "Header logo image URL",
+      "type": "string",
+      "placeholder": "Leave blank to show the site title only"
+    },
+    {
+      "field": "params.hideTitleInHeader",
+      "label": "Hide the site title in the header",
+      "type": "boolean"
+    },
+    {
+      "field": "params.homeName",
+      "label": "Home page name",
+      "type": "string",
+      "placeholder": "Defaults to your Micro.blog name"
+    },
+    {
+      "field": "params.homeHeadline",
+      "label": "Home page headline",
+      "type": "string",
+      "placeholder": "Markdown allowed"
+    },
+    {
+      "field": "params.homeImage",
+      "label": "Home page image URL",
+      "type": "string",
+      "placeholder": "Large image; leave blank to show your avatar"
+    },
+    {
+      "field": "params.homeImageAlt",
+      "label": "Home page image description",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.homeButton1Label",
+      "label": "Home button 1 label",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.homeButton1Url",
+      "label": "Home button 1 URL",
+      "type": "string",
+      "placeholder": "/categories/example/"
+    },
+    {
+      "field": "params.homeButton2Label",
+      "label": "Home button 2 label",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.homeButton2Url",
+      "label": "Home button 2 URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.homeButton3Label",
+      "label": "Home button 3 label",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.homeButton3Url",
+      "label": "Home button 3 URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.homeShowRecent",
+      "label": "Show recent posts on the home page",
+      "type": "boolean"
+    },
+    {
+      "field": "params.homeRecentCategory",
+      "label": "Recent posts category",
+      "type": "string",
+      "placeholder": "Leave blank for all posts"
+    },
+    {
+      "field": "params.showSummary",
+      "label": "Show summaries for titled posts in lists",
+      "type": "boolean"
+    },
+    {
+      "field": "params.showReadingTime",
+      "label": "Show reading time on titled posts",
+      "type": "boolean"
+    },
+    {
+      "field": "params.showCategories",
+      "label": "Show categories on posts",
+      "type": "boolean"
+    },
+    {
+      "field": "params.social_bluesky",
+      "label": "Bluesky profile URL",
+      "type": "string",
+      "placeholder": "https://bsky.app/profile/…"
+    },
+    {
+      "field": "params.social_mastodon",
+      "label": "Mastodon profile URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.social_threads",
+      "label": "Threads profile URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.social_instagram",
+      "label": "Instagram profile URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.social_pixelfed",
+      "label": "Pixelfed profile URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.social_tumblr",
+      "label": "Tumblr URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.social_x",
+      "label": "X profile URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.social_linkedin",
+      "label": "LinkedIn profile URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.social_github",
+      "label": "GitHub profile URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.social_lastfm",
+      "label": "Last.fm profile URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.social_letterboxd",
+      "label": "Letterboxd profile URL",
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.social_email",
+      "label": "Email address",
+      "type": "string",
+      "placeholder": ""
+    }
+  ]
+}

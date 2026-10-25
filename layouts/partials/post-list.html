@@ -1,0 +1,3 @@
+{{- /* All posts, newest first. Called through partialCached so the sort
+       happens once per build rather than once per post page. */ -}}
+{{- return (where site.RegularPages "Type" "post").ByDate.Reverse -}}

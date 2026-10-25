@@ -1,0 +1,66 @@
+{{- /* Body of a post or reply permalink page. */ -}}
+{{- $categoryClasses := slice }}
+{{- range .Params.categories }}{{ $categoryClasses = $categoryClasses | append (. | urlize) }}{{ end }}
+<article class="h-entry {{ delimit $categoryClasses " " }}">
+  <header id="single_header" class="mt-5 max-w-prose">
+    {{- if .Title }}
+      <h1 class="p-name mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title | safeHTML }}</h1>
+    {{- end }}
+    <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+      {{ partial "article-meta.html" . }}
+    </div>
+  </header>
+  {{- with .Params.audio }}
+    <script type="text/javascript" src="https://micro.blog/narration.js?url={{ . }}"></script>
+  {{- end }}
+  <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+    <div class="min-w-0 min-h-0 max-w-fit">
+      <div class="e-content article-content max-w-prose mb-20">
+        {{ .Content }}
+      </div>
+    </div>
+  </section>
+  {{- if site.Params.include_conversation }}
+    <section class="max-w-prose mb-10 print:hidden">
+      <script type="text/javascript" src="https://micro.blog/conversation.js?url={{ .Permalink }}"></script>
+    </section>
+  {{- end }}
+  {{- if eq .Type "post" }}
+    {{- /* Micro.blog sections are per year, so walk the full post list
+           rather than using InSection, which stops at year boundaries. */ -}}
+    {{- $posts := partialCached "post-list.html" . }}
+    {{- $older := $posts.Prev . }}
+    {{- $newer := $posts.Next . }}
+    {{- if or $older $newer }}
+      <footer class="pt-8 max-w-prose print:hidden">
+        <div class="pt-8">
+          <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+          <div class="flex justify-between gap-4 pt-3">
+            <span>
+              {{- with $older }}
+                <a class="flex gap-2 decoration-primary-500 hover:underline" href="{{ .RelPermalink }}">
+                  <span class="text-neutral-700 dark:text-neutral">&larr;</span>
+                  <span class="flex flex-col">
+                    <span class="leading-6">{{ .Title | default (.Summary | plainify | htmlUnescape | truncate 40) }}</span>
+                    <span class="text-xs text-neutral-500 dark:text-neutral-400">{{ .Date | time.Format ":date_long" }}</span>
+                  </span>
+                </a>
+              {{- end }}
+            </span>
+            <span>
+              {{- with $newer }}
+                <a class="flex gap-2 text-right decoration-primary-500 hover:underline" href="{{ .RelPermalink }}">
+                  <span class="flex flex-col">
+                    <span class="leading-6">{{ .Title | default (.Summary | plainify | htmlUnescape | truncate 40) }}</span>
+                    <span class="text-xs text-neutral-500 dark:text-neutral-400">{{ .Date | time.Format ":date_long" }}</span>
+                  </span>
+                  <span class="text-neutral-700 dark:text-neutral">&rarr;</span>
+                </a>
+              {{- end }}
+            </span>
+          </div>
+        </div>
+      </footer>
+    {{- end }}
+  {{- end }}
+</article>

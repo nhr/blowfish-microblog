@@ -1,0 +1,8 @@
+{{ define "main" }}
+  <header class="mt-5">
+    <h1 class="mt-0 mb-3 text-4xl font-extrabold text-neutral-900 dark:text-neutral">Page not found</h1>
+  </header>
+  <section class="prose dark:prose-invert">
+    <p>The page you were looking for doesn't exist. Try the <a href="{{ "/" | relURL }}">home page</a> or the <a href="{{ "archive/" | relURL }}">archive</a>.</p>
+  </section>
+{{ end }}

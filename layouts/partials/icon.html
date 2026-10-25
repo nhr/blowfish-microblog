@@ -1,0 +1,4 @@
+{{- $path := printf "partials/icons/%s.html" . -}}
+{{- if templates.Exists $path -}}
+  <span class="relative block icon">{{ partial (printf "icons/%s.html" .) . }}</span>
+{{- end -}}

@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <article>
+    {{- if .Title }}
+      <header class="mt-5 max-w-prose">
+        <h1 class="mt-0 mb-6 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title | safeHTML }}</h1>
+      </header>
+    {{- end }}
+    <section class="max-w-full mt-0 prose dark:prose-invert">
+      <div class="article-content max-w-prose mb-20">
+        {{ .Content }}
+      </div>
+    </section>
+  </article>
+{{ end }}

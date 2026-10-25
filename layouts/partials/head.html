@@ -1,0 +1,76 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    {{- if .IsHome -}}
+      {{ site.Title }}
+    {{- else if .Title -}}
+      {{ .Title | plainify | htmlUnescape }} · {{ site.Title }}
+    {{- else -}}
+      {{ .Summary | plainify | htmlUnescape | truncate 60 }} · {{ site.Title }}
+    {{- end -}}
+  </title>
+
+  {{- $description := site.Params.description | default site.Params.itunes_description }}
+  {{- if not .IsHome }}{{ with .Summary }}{{ $description = . }}{{ end }}{{ end }}
+  {{- $description = $description | plainify | htmlUnescape | truncate 160 }}
+  <meta name="description" content="{{ $description }}">
+  {{- with site.Params.author.name }}
+  <meta name="author" content="{{ . }}">
+  {{- end }}
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  {{/* Social cards */}}
+  {{- $image := "" }}
+  {{- with .Params.photos }}{{ $image = index . 0 }}{{ end }}
+  {{- if and (not $image) .Params.images }}{{ $image = index .Params.images 0 }}{{ end }}
+  {{- if and (not $image) .IsHome }}{{ $image = site.Params.homeImage }}{{ end }}
+  <meta property="og:site_name" content="{{ site.Title }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title | default site.Title | plainify | htmlUnescape }}{{ end }}">
+  <meta property="og:description" content="{{ $description }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  {{- with $image }}
+  <meta property="og:image" content="{{ . }}">
+  <meta name="twitter:card" content="summary_large_image">
+  {{- else }}
+  <meta name="twitter:card" content="summary">
+  {{- end }}
+
+  {{/* Feeds */}}
+  {{- with .OutputFormats.Get "RSS" }}
+  <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+  {{- end }}
+  <link rel="alternate" type="application/json" href="{{ "feed.json" | absURL }}" title="{{ site.Title }}">
+
+  {{/* Appearance: set the dark class before CSS paints, to avoid a flash */}}
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var stored = null;
+      try { stored = localStorage.getItem("appearance"); } catch (e) {}
+      var auto = root.getAttribute("data-auto-appearance") === "true";
+      var dark = stored === "dark" ||
+        (stored === null && root.getAttribute("data-default-appearance") === "dark") ||
+        (stored === null && auto && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      if (dark) root.classList.add("dark");
+    })();
+  </script>
+
+  {{- $scheme := site.Params.colorScheme | default "blowfish" | lower }}
+  <link rel="stylesheet" href="{{ printf "css/schemes/%s.css" $scheme | relURL }}?{{ site.Params.theme_seconds }}">
+  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}?{{ site.Params.theme_seconds }}">
+  <link rel="stylesheet" href="{{ "css/custom.css" | relURL }}?{{ site.Params.theme_seconds }}">
+  {{- range site.Params.plugins_css }}
+  <link rel="stylesheet" href="{{ . }}">
+  {{- end }}
+  {{- range $filename := site.Params.plugins_html }}
+  {{ partial $filename $ }}
+  {{- end }}
+  {{- if templates.Exists "partials/custom_head.html" }}
+  {{ partial "custom_head.html" . }}
+  {{- end }}
+  {{ partial "microblog_head.html" . }}
+</head>

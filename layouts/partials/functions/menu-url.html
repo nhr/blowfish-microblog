@@ -1,0 +1,9 @@
+{{- /* Micro.blog pages can point a menu entry elsewhere with a redirect
+       parameter; themes use both redirect_url and redirect. */ -}}
+{{- $url := .URL | relLangURL -}}
+{{- with .Page -}}
+  {{- with or .Params.redirect_url .Params.redirect -}}
+    {{- $url = . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $url -}}

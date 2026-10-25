@@ -1,0 +1,16 @@
+{{- $pag := . -}}
+{{- if or $pag.HasPrev $pag.HasNext }}
+  <nav aria-label="Pagination" class="flex flex-row mt-12 justify-between text-base font-medium">
+    <span>
+      {{- if $pag.HasNext }}
+        <a href="{{ $pag.Next.URL }}" rel="next" class="decoration-primary-500 hover:underline hover:text-primary-600 dark:hover:text-primary-400">&larr; Older</a>
+      {{- end }}
+    </span>
+    <span class="text-sm text-neutral-500 dark:text-neutral-400">Page {{ $pag.PageNumber }} of {{ $pag.TotalPages }}</span>
+    <span>
+      {{- if $pag.HasPrev }}
+        <a href="{{ $pag.Prev.URL }}" rel="prev" class="decoration-primary-500 hover:underline hover:text-primary-600 dark:hover:text-primary-400">Newer &rarr;</a>
+      {{- end }}
+    </span>
+  </nav>
+{{- end }}

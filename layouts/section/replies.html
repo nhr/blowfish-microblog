@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <header class="mt-5">
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title | default "Replies" }}</h1>
+  </header>
+  {{- $replies := (where .Pages "Type" "reply").ByDate.Reverse }}
+  {{- $list := first 50 $replies }}
+  {{- $paginator := false }}
+  {{- if site.Params.paginate_replies }}
+    {{- $paginator = .Paginate $replies }}
+    {{- $list = $paginator.Pages }}
+  {{- end }}
+  <section class="h-feed mt-10 space-y-10 w-full max-w-prose">
+    {{- range $list }}
+      {{ partial "article-link.html" . }}
+    {{- end }}
+  </section>
+  {{- with $paginator }}{{ partial "pagination.html" . }}{{ end }}
+{{ end }}
