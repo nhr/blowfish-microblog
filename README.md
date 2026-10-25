@@ -36,6 +36,8 @@ All settings are on the plug-in's settings screen.
 
 Blowfish builds its pages through Hugo Pipes, image processing, about 30 translations and a large set of bundled JavaScript libraries (search, charts, diagrams, maths, galleries and others). This port keeps Blowfish's precompiled Tailwind stylesheet and color schemes. Its templates are rewritten for Micro.blog, reusing Blowfish's markup and class names so the stylesheet applies as-is.
 
+Micro.blog layers a plug-in theme over the design selected underneath it, and any template the plug-in doesn't provide falls through to the theme below. That's why this theme also provides `taxonomy.html`, `term.html` and `terms.html`, which older themes use for category pages, rather than relying on `list.html` alone.
+
 Tailwind only ships the classes Blowfish's own templates use. When changing templates, use a class that already appears in `static/css/main.css`, or add a rule to `static/css/custom.css`.
 
 Left out for now:

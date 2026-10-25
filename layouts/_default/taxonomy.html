@@ -1,0 +1,10 @@
+{{- /* Hugo 0.158 looks for term.html and terms.html first; this file also
+       shadows taxonomy.html from any theme installed underneath (Micro.blog
+       layers plug-in themes over the selected design). */ -}}
+{{ define "main" }}
+  {{- if eq .Kind "taxonomy" }}
+    {{ partial "terms-body.html" . }}
+  {{- else }}
+    {{ partial "list-body.html" . }}
+  {{- end }}
+{{ end }}

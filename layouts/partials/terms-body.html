@@ -1,0 +1,20 @@
+{{- /* Index of all categories, as cards with post counts. */ -}}
+<header class="mt-5">
+  <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title | default "Categories" | safeHTML }}</h1>
+</header>
+<section class="mt-10 w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+  {{- range .Data.Terms.Alphabetical }}
+    <article class="article-link--card group relative flex flex-col min-h-full min-w-full overflow-hidden rounded-lg border border-neutral-300/80 bg-white/85 dark:border-neutral-600/80 dark:bg-neutral-900/80">
+      <div class="p-4">
+        <a
+          href="{{ .Page.RelPermalink }}"
+          class="not-prose before:absolute before:inset-0 decoration-primary-500 dark:text-neutral text-xl font-bold text-neutral-800 hover:underline hover:underline-offset-2">
+          <h2>{{ .Page.Title | safeHTML }}</h2>
+        </a>
+        <div class="text-sm text-neutral-500 dark:text-neutral-400">
+          {{ .Count }} {{ cond (eq .Count 1) "post" "posts" }}
+        </div>
+      </div>
+    </article>
+  {{- end }}
+</section>
