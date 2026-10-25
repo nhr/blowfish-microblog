@@ -1,25 +1,11 @@
 {
   "params": {
-    "description": "",
-    "colorScheme": "blowfish",
-    "defaultAppearance": "light",
-    "autoSwitchAppearance": true,
-    "showAppearanceSwitcher": true,
-    "logo": "",
-    "hideTitleInHeader": false,
+
     "homeName": "",
     "homeHeadline": "",
     "homeImage": "",
     "homeImageAlt": "",
-    "homeShowRecent": false,
-    "homeRecentCount": 5,
-    "homeRecentCategory": "",
-    "listCards": true,
-    "showSummary": true,
-    "showReadingTime": true,
-    "showCategories": true,
-    "listPageSize": 20,
-    "photosIgnoreCategories": [],
+
     "social_bluesky": "",
     "social_mastodon": "",
     "social_threads": "",
@@ -31,6 +17,26 @@
     "social_github": "",
     "social_lastfm": "",
     "social_letterboxd": "",
-    "social_email": ""
+    "social_email": "",
+
+    "description": "",
+
+    "homeShowRecent": false,
+    "homeRecentCount": 5,
+    "homeRecentCategory": "",
+
+    "colorScheme": "blowfish",
+    "defaultAppearance": "light",
+    "autoSwitchAppearance": true,
+    "showAppearanceSwitcher": true,
+    "logo": "",
+    "hideTitleInHeader": false,
+
+    "listCards": true,
+    "showSummary": true,
+    "showReadingTime": true,
+    "showCategories": true,
+    "listPageSize": 20,
+    "photosIgnoreCategories": []
   }
 }
