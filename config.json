@@ -38,6 +38,6 @@
     "showCategories": true,
     "showSearch": true,
     "listPageSize": 20,
-    "photosIgnoreCategories": []
+    "photosIgnoreCategories": ""
   }
 }

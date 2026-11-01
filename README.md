@@ -33,7 +33,7 @@ All settings are on the plug-in's settings screen.
 | Show category pages as cards | On by default |
 | Posts per page on category pages | 20 by default |
 | Show search on category and archive pages | On by default |
-| Categories to leave off the Photos page | A JSON list such as `["Screenshots", "Memes"]`. Plain comma-separated names work too. |
+| Categories to leave off the Photos page | Comma-separated, such as `Screenshots, Memes` |
 | Show recent posts on home page | Optionally limited to one category. Shows 5 by default ("Number of recent posts"). |
 | Social profile URLs | Bluesky, Mastodon, Threads, Instagram, Pixelfed, Tumblr, X, LinkedIn, GitHub, Last.fm, Letterboxd, email |
 

@@ -1,7 +1,7 @@
 {{ define "main" }}
-  {{- /* A "json" settings field arrives as a string (see andysylvester/plugin-glossary),
-       while config.json gives a real list. Accept either, and fall back to
-       comma-separated names so a JSON typo can't break the site build. */}}
+  {{- /* The settings field is comma-separated text. Also accept a real list
+       (older config.json) or JSON text (saved while this was a "json" field,
+       which arrives as a string; see andysylvester/plugin-glossary). */}}
   {{- $ignore := site.Params.photosIgnoreCategories | default slice }}
   {{- if reflect.IsSlice $ignore }}
   {{- else if strings.TrimSpace $ignore }}

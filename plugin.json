@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "title": "Blowfish for Micro.blog",
   "description": "A trimmed-down port of the Blowfish Hugo theme for Micro.blog.",
   "fields": [
@@ -117,8 +117,8 @@
     {
       "field": "params.photosIgnoreCategories",
       "label": "Categories to leave off the Photos page",
-      "type": "json",
-      "placeholder": "[\"Screenshots\", \"Memes\"]"
+      "type": "string",
+      "placeholder": "Comma-separated, e.g. Screenshots, Memes"
     },
     {
       "field": "params.social_bluesky",
