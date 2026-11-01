@@ -1,6 +1,6 @@
 # Blowfish for Micro.blog
 
-A port of the [Blowfish](https://blowfish.page/) Hugo theme to [Micro.blog](https://micro.blog), cut down to what a Micro.blog site needs. Blowfish's full repository is over 200 MB. This theme is under 500 KB, most of which is Blowfish's precompiled stylesheet.
+A port of the [Blowfish](https://blowfish.page/) Hugo theme to [Micro.blog](https://micro.blog), cut down to what a Micro.blog site needs. Blowfish's full repository is over 200 MB. This theme is under 1 MB, most of which is Blowfish's precompiled stylesheet and the example screenshot.
 
 Requires Micro.blog's Hugo 0.158 (Design → Hugo version).
 

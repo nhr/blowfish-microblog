@@ -4,7 +4,7 @@ This file gives context to Claude Code (and anyone else) working on this repo.
 
 ## What this is
 
-A Micro.blog theme plug-in that ports the look of the [Blowfish](https://github.com/nunocoracao/blowfish) Hugo theme. Micro.blog wouldn't host full Blowfish, which is over 200 MB with its example site, images and bundled JS. This port is about 450 KB.
+A Micro.blog theme plug-in that ports the look of the [Blowfish](https://github.com/nunocoracao/blowfish) Hugo theme. Micro.blog wouldn't host full Blowfish, which is over 200 MB with its example site, images and bundled JS. This port is under 1 MB, including the README's example images.
 
 It keeps Blowfish's precompiled Tailwind stylesheet, color schemes, a handful of SVG icons and its MIT license, all from Blowfish commit `ebe683e` (2026-10-07). Every template is rewritten for Micro.blog, reusing Blowfish's markup and class names so its CSS applies unchanged. Nothing is built at deploy time: no Hugo Pipes, no npm and no image processing.
 
