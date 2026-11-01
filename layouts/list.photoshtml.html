@@ -1,5 +1,24 @@
 {{ define "main" }}
+  {{- /* A "json" settings field arrives as a string (see andysylvester/plugin-glossary),
+       while config.json gives a real list. Accept either, and fall back to
+       comma-separated names so a JSON typo can't break the site build. */}}
   {{- $ignore := site.Params.photosIgnoreCategories | default slice }}
+  {{- if reflect.IsSlice $ignore }}
+  {{- else if strings.TrimSpace $ignore }}
+    {{- with try (transform.Unmarshal (dict "format" "json") $ignore) }}
+      {{- if and (not .Err) (reflect.IsSlice .Value) }}
+        {{- $ignore = .Value }}
+      {{- else }}
+        {{- $names := slice }}
+        {{- range split $ignore "," }}
+          {{- with strings.Trim . "[]\" " }}{{ $names = $names | append . }}{{ end }}
+        {{- end }}
+        {{- $ignore = $names }}
+      {{- end }}
+    {{- end }}
+  {{- else }}
+    {{- $ignore = slice }}
+  {{- end }}
   {{- $pages := slice }}
   {{- range (where site.RegularPages "Params.photos" "!=" nil).ByDate.Reverse }}
     {{- if not (intersect (.Params.categories | default slice) $ignore) }}

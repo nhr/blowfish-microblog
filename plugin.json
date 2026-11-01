@@ -1,5 +1,5 @@
 {
-  "version": "0.3.4",
+  "version": "1.0.0",
   "title": "Blowfish for Micro.blog",
   "description": "A trimmed-down port of the Blowfish Hugo theme for Micro.blog.",
   "fields": [
@@ -61,9 +61,21 @@
       "placeholder": ""
     },
     {
+      "field": "params.description",
+      "label": "Site description",
+      "type": "string",
+      "placeholder": "For search engines and link previews; defaults to your Micro.blog description"
+    },
+    {
       "field": "params.homeShowRecent",
       "label": "Show recent posts on the home page",
       "type": "boolean"
+    },
+    {
+      "field": "params.homeRecentCount",
+      "label": "Number of recent posts",
+      "type": "integer",
+      "placeholder": "5"
     },
     {
       "field": "params.homeRecentCategory",
@@ -75,6 +87,12 @@
       "field": "params.listCards",
       "label": "Show category pages as cards",
       "type": "boolean"
+    },
+    {
+      "field": "params.listPageSize",
+      "label": "Posts per page on category pages",
+      "type": "integer",
+      "placeholder": "20"
     },
     {
       "field": "params.showSummary",
@@ -95,6 +113,12 @@
       "field": "params.showSearch",
       "label": "Show search on category and archive pages",
       "type": "boolean"
+    },
+    {
+      "field": "params.photosIgnoreCategories",
+      "label": "Categories to leave off the Photos page",
+      "type": "json",
+      "placeholder": "[\"Screenshots\", \"Memes\"]"
     },
     {
       "field": "params.social_bluesky",

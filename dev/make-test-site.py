@@ -146,6 +146,8 @@ def main():
             body = f"Short micropost {i}."
         else:
             fm["photos"] = [IMG]
+            if i % 8 == 3:  # for testing photosIgnoreCategories
+                fm["categories"] = ["Screenshots"]
             body = f'Photo post {i}\n\n<img src="{IMG}" width="600" height="338" alt="">'
         write(f"{content}/{date:%Y/%m/%d}/post-{i}.md", fm, body)
 

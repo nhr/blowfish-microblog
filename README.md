@@ -28,13 +28,14 @@ All settings are on the plug-in's settings screen.
 | --- | --- |
 | Color scheme | `blowfish` (default), `avocado`, `autumn`, `bloody`, `burufugu`, `congo`, `fire`, `forest`, `github`, `marvel`, `neon`, `noir`, `ocean`, `one-light`, `princess`, `slate`, `terminal` |
 | Default appearance | `light` or `dark`, used when not following the system setting |
+| Site description | Used for search engines and link previews. Defaults to your Micro.blog site description. |
 | Home page name, headline, image | The name defaults to your Micro.blog name. Without an image, your avatar is shown. |
 | Show category pages as cards | On by default |
+| Posts per page on category pages | 20 by default |
 | Show search on category and archive pages | On by default |
-| Show recent posts on home page | Optionally limited to one category |
+| Categories to leave off the Photos page | A JSON list such as `["Screenshots", "Memes"]`. Plain comma-separated names work too. |
+| Show recent posts on home page | Optionally limited to one category. Shows 5 by default ("Number of recent posts"). |
 | Social profile URLs | Bluesky, Mastodon, Threads, Instagram, Pixelfed, Tumblr, X, LinkedIn, GitHub, Last.fm, Letterboxd, email |
-
-`photosIgnoreCategories`, a list of categories to leave off the Photos page, can only be set in `config.json`.
 
 ### Example
 

@@ -41,7 +41,7 @@ These were learned while building it, from the reference themes listed below, an
   - Photos are in `.Params.photos`.
   - See `partials/functions/post-media.html`.
 - **`/newsletters/` is reserved by Micro.blog** for its sent-newsletter archive, so a page or redirect at that path never renders.
-- **Settings screen** (`plugin.json` fields): types are `string`, `boolean` and `color`. There are no lists, which is why list-like settings would need numbered fields. Values land in `site.Params`. Hugo lowercases param keys, so `index site.Params "homebutton1label"`-style lookups must use lowercase.
+- **Settings screen** (`plugin.json` fields): the [plug-in guide](https://help.micro.blog/t/plug-ins/104) lists `string`, `boolean`, `integer`, `color`, `markdown`, `css` and `json`. `integer` is used by Cobalt. A `json` field is a text box whose value arrives as a *string*, while the default in `config.json` can be a real list. `photosIgnoreCategories` handles both: see `list.photoshtml.html`, which parses the string with `transform.Unmarshal (dict "format" "json")` (plain `unmarshal` can't detect a JSON array) and falls back to comma-separated names. andysylvester/plugin-glossary is the example of a `json` field. Values land in `site.Params`. Hugo lowercases param keys, so `index site.Params "homebutton1label"`-style lookups must use lowercase.
 
 ## Layout map
 
@@ -131,7 +131,7 @@ Local Hugo (Homebrew) is newer than Micro.blog's 0.158, so a clean local build i
 
 ## Status
 
-- **Version 0.3.4**, deployed on https://harrisonripps.com (installed over Microwave) and verified live on 2026-10-25.
+- **Version 1.0.0** prepared for the plug-in directory (2026-11-01): adds settings fields for the site description, recent post count, category page size and Photos page categories to leave out. Version 0.3.4 was deployed on https://harrisonripps.com (installed over Microwave) and verified live on 2026-10-25.
 - **Done:**
   - home profile card
   - Blowfish header and footer
@@ -149,7 +149,8 @@ Local Hugo (Homebrew) is newer than Micro.blog's 0.158, so a clean local build i
 When unsure how Micro.blog expects something done, look at recently updated themes:
 - **[jimmitchell/mnml](https://github.com/jimmitchell/mnml)** has the most complete coverage (archive, photos, replies, newsletter, redirect, search) and is actively maintained.
 - **The official microdotblog themes** (theme-alpine, theme-soho, theme-gateway, Sumo-Theme) show the Hugo 0.158 fixes.
-- **mikeschepker/Cobalt** shows the `Language.Locale` change.
+- **mikeschepker/Cobalt** shows the `Language.Locale` change and `integer` and `markdown` settings fields.
+- **[andysylvester/plugin-glossary](https://github.com/andysylvester/plugin-glossary)** uses a `json` settings field.
 
 ## Not ported yet / ideas
 
