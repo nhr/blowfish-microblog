@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <!-- Placeholder home image for the example site: layered hills under a sunset sky -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e3a8a"/>
+      <stop offset="0.55" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#a5f3fc"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.68" cy="0.52" r="0.35">
+      <stop offset="0" stop-color="#fde68a" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#fde68a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <circle cx="1090" cy="470" r="90" fill="#fef3c7"/>
+  <path d="M0 560 C 220 470 420 520 620 480 S 1000 400 1240 470 S 1500 520 1600 490 V900 H0Z" fill="#60a5fa"/>
+  <path d="M0 640 C 260 560 480 620 720 580 S 1120 540 1340 600 S 1540 640 1600 620 V900 H0Z" fill="#2563eb"/>
+  <path d="M0 730 C 300 660 560 720 820 690 S 1260 650 1600 710 V900 H0Z" fill="#1d4ed8"/>
+  <path d="M0 820 C 340 770 640 810 960 790 S 1400 770 1600 800 V900 H0Z" fill="#1e3a8a"/>
+</svg>

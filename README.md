@@ -4,6 +4,8 @@ A port of the [Blowfish](https://blowfish.page/) Hugo theme to [Micro.blog](http
 
 Requires Micro.blog's Hugo 0.158 (Design → Hugo version).
 
+![The home page of an example site using this theme: a large header image, the name Jamie Sample, a headline and Instagram, LinkedIn and GitHub links](example/screenshot.jpg)
+
 ## What's included
 
 - **Home page.** A profile card: a large image or your avatar, your name, a headline and social links. Recent posts can optionally appear below it.
@@ -33,6 +35,10 @@ All settings are on the plug-in's settings screen.
 | Social profile URLs | Bluesky, Mastodon, Threads, Instagram, Pixelfed, Tumblr, X, LinkedIn, GitHub, Last.fm, Letterboxd, email |
 
 `photosIgnoreCategories`, a list of categories to leave off the Photos page, can only be set in `config.json`.
+
+### Example
+
+[`example/config.json`](example/config.json) is the configuration behind the screenshot above: a home image, a name and headline, and Instagram, LinkedIn and GitHub links, with everything else left at its default. The accounts are placeholders, and the home image is [`example/home-image.jpg`](example/home-image.jpg) (drawn from `example/home-image.svg`). To use your own, upload an image to Micro.blog and paste its URL into the home page image setting.
 
 ## How it was cut down
 

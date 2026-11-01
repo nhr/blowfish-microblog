@@ -86,6 +86,7 @@ There's no Micro.blog to run locally. Use the fake site generator, which mimics 
 ```sh
 python3 dev/make-test-site.py /tmp/mbtest                       # this theme alone
 python3 dev/make-test-site.py /tmp/mbtest2 --under ../microwave  # layered over another theme, as on Micro.blog
+python3 dev/make-test-site.py /tmp/mbexample --config example/config.json  # the README screenshot's settings
 cd /tmp/mbtest && hugo && python3 -m http.server -d public 8099
 python3 dev/classcheck.py static/css/main.css,static/css/custom.css /tmp/mbtest/public
 ```
@@ -97,6 +98,7 @@ To check pages visually, take screenshots with headless Chrome:
   --window-size=1280,1200 --screenshot=out.png http://localhost:8099/categories/posts/
 ```
 
+- **README screenshot:** build the `--config example/config.json` site and capture the home page at `--window-size=1280,1100` as a PNG, then convert it with `sips -Z 1200 -s format jpeg -s formatOptions 85 shot.png --out example/screenshot.jpg`. Retake it after visible changes to the home page, header or footer.
 - **Phone width:** headless Chrome can't go narrower than about 500 px. Load the page in a 390 px-wide `<iframe>` in a wrapper HTML file instead.
 - **Dark mode:** build with `params.defaultAppearance: dark` and `params.autoSwitchAppearance: false`.
 

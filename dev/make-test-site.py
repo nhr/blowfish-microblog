@@ -8,10 +8,15 @@ author info under params.author, and stub microblog_head/custom_footer
 partials.
 
 Usage:
-  python3 dev/make-test-site.py SITE_DIR [--under PATH_TO_OTHER_THEME]
+  python3 dev/make-test-site.py SITE_DIR [--under PATH_TO_OTHER_THEME] [--config FILE]
 
 --under layers this theme over another (e.g. a clone of Microwave), the way
-Micro.blog layers a plug-in theme over the selected design. Then:
+Micro.blog layers a plug-in theme over the selected design.
+
+--config applies a plug-in config.json's params over the test values, e.g.
+example/config.json for the README screenshot. URLs pointing at this repo on
+raw.githubusercontent.com are served from the local checkout instead, so the
+example works before it's pushed. Then:
 
   cd SITE_DIR && hugo && python3 -m http.server -d public 8099
 
@@ -23,10 +28,12 @@ import datetime
 import json
 import os
 import random
+import shutil
 
 THEME = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG = "https://eu.uploads.micro.blog/215277/2025/action-shot.png"
 POSTER = "https://eu.uploads.micro.blog/215277/2026/frames/1840458-2-fd4b87.jpg"
+RAW = "https://raw.githubusercontent.com/nhr/blowfish-microblog/main/"
 LOREM = ("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod "
          "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.")
 
@@ -41,6 +48,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("site")
     parser.add_argument("--under", help="theme to layer this one over")
+    parser.add_argument("--config", help="plug-in config.json whose params override the test values")
     args = parser.parse_args()
 
     site = os.path.abspath(args.site)
@@ -80,6 +88,16 @@ def main():
         "paginate_replies": True,
         "theme_seconds": "1",
     })
+    if args.config:
+        params.update(json.load(open(args.config))["params"])
+        params["author"]["name"] = params["homeName"] or params["author"]["name"]
+        for key, value in params.items():
+            if isinstance(value, str) and value.startswith(RAW):
+                rel = value[len(RAW):]
+                dest = os.path.join(site, "static", rel)
+                os.makedirs(os.path.dirname(dest), exist_ok=True)
+                shutil.copy(os.path.join(THEME, rel), dest)
+                params[key] = "/" + rel
     config = {
         "baseURL": "http://localhost:8099/",
         "title": "Test Site",
